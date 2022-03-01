@@ -7,6 +7,6 @@
             <Image src ="https://cdn-icons.flaticon.com/png/512/3862/premium/3862809.png?token=exp=1646153104~hmac=106525230587483184459909122a8a21" height="200px"/>
         </pages>
     </Carousel>
-    <Button text="Say Hello" press="onShowHello"></Button>
+    <Button text="{i18n>showHelloButtonText}" press="onShowHello"></Button>
     <Input value="{helloPanel>/recipient/name}" description="Hello {helloPanel>/recipient/name} (we are using 2way biding)" valueLiveUpdate="true" width="60%" showClearIcon="true"/>
 </mvc:View>
