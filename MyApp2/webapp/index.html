@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8" />
+    <title>G.O.A.T</title>
+    <script
+      id="sap-ui-bootstrap"
+      src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+      data-sap-ui-theme="sap_bluecrystal"
+      data-sap-ui-libs="sap.m"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-preload="async"
+      data-sap-ui-resourceroots='{"opensap.myapp": "./"}'
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        // let oImage = new sap.m.Image({
+        //   src: "https://cdn-icons.flaticon.com/png/512/3862/premium/3862976.png?token=exp=1646151652~hmac=9194b4d5ca9e24798f8cdcf5ad5c91a1",
+        // }).placeAt("content");
+        // oImage.setHeight("200px");
+        //   sap.ui
+        //     .xmlview({
+        //       viewName: "opensap.myapp.view.App",
+        //     })
+        //     .placeAt("content");
+        new sap.ui.core.ComponentContainer({
+          name: "opensap.myapp",
+        }).placeAt("content");
+      });
+      // title and description FLP tile
+      // SAP UI supported devices
+      // SAP.UI5 adds UI5-specific configuration parameters that are automatically processed by SAPUI5
+      // rootView we specify the root view which will be automatically instantiated by the component when it is loaded + we define dependencies and models
+    </script>
+  </head>
+  <body class="sapUiBody" id="content"></body>
+</html>

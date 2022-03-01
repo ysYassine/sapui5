@@ -1,0 +1,11 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" controllerName="opensap.myapp.controller.App">
+    <Carousel>
+        <pages>
+            <Image src ="https://cdn-icons.flaticon.com/png/512/3862/premium/3862976.png?token=exp=1646151652~hmac=9194b4d5ca9e24798f8cdcf5ad5c91a1" height="200px"/>
+            <Image src ="https://cdn-icons.flaticon.com/png/512/3862/premium/3862883.png?token=exp=1646153099~hmac=a75c37a8580269d5b08cdf9ce18330a8" height="200px"/>
+            <Image src ="https://cdn-icons.flaticon.com/png/512/3862/premium/3862809.png?token=exp=1646153104~hmac=106525230587483184459909122a8a21" height="200px"/>
+        </pages>
+    </Carousel>
+    <Button text="Say Hello" press="onShowHello"></Button>
+</mvc:View>
