@@ -18,7 +18,12 @@
                                     </pages>
                                 </Carousel>
                                 <Button text="{i18n>showHelloButtonText}" press="onShowHello"></Button>
-                                <Input value="{helloPanel>/recipient/name}" description="Hello {helloPanel>/recipient/name} (we are using 2way binding)" valueLiveUpdate="true" width="60%" showClearIcon="true"/>
+                                <Input value="{
+                                    path: 'helloPanel>/recipient/amount',
+                                    type: 'sap.ui.model.type.Float',
+                                    formatOptions: {minFractionDigits: 2},
+                                    constraints: {maximum : 3000}
+                                    }" description="Please enter a number" valueLiveUpdate="false" width="60%" showClearIcon="true"/>
                             </IconTabFilter>
                             <IconTabSeparator />
                             <IconTabFilter id="layouts" text="{i18n>layoutFilter}" icon="sap-icon://business-objects-mobile" class="editableForm sapUiSmallMarginTopBottom">
@@ -56,7 +61,16 @@
                                 <content>
                                     <List headerText="{i18n>productListTitle}" items="{/ProductSet}">
                                         <items>
-                                            <ObjectListItem title="{Name}" number="{Price}" intro="{ProductID}" numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}">
+                                            <ObjectListItem title="{Name}" number="{
+                                                parts: [
+                                                {path: 'Price'},
+                                                {path: 'CurrencyCode'}
+                                                ],
+                                                type: 'sap.ui.model.type.Currency',
+                                                formatOptions: {
+                                                showMeasure: false
+                                                }
+                                                }" intro="{ProductID}" numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}">
                                                 <firstStatus>
                                                     <ObjectStatus text="{
                                                     parts: [
