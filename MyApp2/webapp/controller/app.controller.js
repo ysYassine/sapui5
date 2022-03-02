@@ -39,6 +39,14 @@ sap.ui.define(
         // which will make all entries visible again
         oBinding.filter(aFilter);
       },
+      onItemSelected: function (oEvent) {
+        let oSelectedItem = oEvent.getSource();
+        let oContext = oSelectedItem.getBindingContext();
+        let sPath = oContext.getPath();
+        let oProductDetailPanel = this.byId("productDetailsPanel");
+        oProductDetailPanel.bindElement({ path: sPath });
+        this.byId("productDetailsPanel").setVisible(true);
+      },
     });
   }
 );
