@@ -2,9 +2,11 @@ sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator",
     "opensap/myapp/model/formatter",
   ],
-  function (Controller, MessageToast, formatter) {
+  function (Controller, MessageToast, Filter, FilterOperator, formatter) {
     "use strict";
     //appname: opensap.myapp
     //name of the folder: controller
@@ -18,25 +20,24 @@ sap.ui.define(
           .getModel("helloPanel")
           .getProperty("/recipient/name");
         let sMsg = oBundle.getText("helloMsg", [sRecipient]);
-        // show message
         MessageToast.show(sMsg);
-        // MessageToast.show(
-        //   "Hello World"
-        //   // {
-        //   //   duration: 3000, // default
-        //   //   width: "15em", // default
-        //   //   my: "center bottom", // default
-        //   //   at: "center bottom", // default
-        //   //   of: window, // default
-        //   //   offset: "0 0", // default
-        //   //   collision: "fit fit", // default
-        //   //   onClose: null, // default
-        //   //   autoClose: true, // default
-        //   //   animationTimingFunction: "ease", // default
-        //   //   animationDuration: 1000, // default
-        //   //   closeOnBrowserNavigation: true, // default
-        //   // }
-        // );
+      },
+      onFilterProducts: function (oEvent) {
+        // build filter array
+        var aFilter = [],
+          sQuery = oEvent.getParameter("query"),
+          // retrieve list control
+          oList = this.getView().byId("productsList"),
+          // get binding for aggregation 'items'
+          oBinding = oList.getBinding("items");
+        if (sQuery) {
+          aFilter.push(
+            new Filter("ProductID", FilterOperator.Contains, sQuery)
+          );
+        }
+        // apply filter. an empty filter array simply removes the filter
+        // which will make all entries visible again
+        oBinding.filter(aFilter);
       },
     });
   }
