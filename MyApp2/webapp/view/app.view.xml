@@ -7,7 +7,7 @@
         <pages>
             <Page title="Developing with SAPUI5">
                 <content>
-                    <IconTabBar id="idIconTabBar" class="sapUiResponsiveContentPadding">
+                    <IconTabBar id="idIconTabBar" selectedKey="db" class="sapUiResponsiveContentPadding">
                         <items>
                             <IconTabFilter id="start" text="{i18n>gettingStartedFilter}" icon="sap-icon://add-activity-2">
                                 <Carousel>
@@ -18,7 +18,7 @@
                                     </pages>
                                 </Carousel>
                                 <Button text="{i18n>showHelloButtonText}" press="onShowHello"></Button>
-                                <Input value="{helloPanel>/recipient/name}" description="Hello {helloPanel>/recipient/name} (we are using 2way biding)" valueLiveUpdate="true" width="60%" showClearIcon="true"/>
+                                <Input value="{helloPanel>/recipient/name}" description="Hello {helloPanel>/recipient/name} (we are using 2way binding)" valueLiveUpdate="true" width="60%" showClearIcon="true"/>
                             </IconTabFilter>
                             <IconTabSeparator />
                             <IconTabFilter id="layouts" text="{i18n>layoutFilter}" icon="sap-icon://business-objects-mobile" class="editableForm sapUiSmallMarginTopBottom">
@@ -50,6 +50,15 @@
                                     <Button text="{i18n>layoutPublishButton}" type="Accept" icon="sap-icon://outbox"/>
                                     <Button text="{i18n>layoutDraftButton}" icon="sap-icon://save"/>
                                 </Toolbar>
+                            </IconTabFilter>
+                            <IconTabFilter text="{i18n>dataBindingFilter}" key="db" icon="sap-icon://machine">
+                                <content>
+                                    <List headerText="{i18n>productListTitle}" items="{/ProductSet}">
+                                        <items>
+                                            <ObjectListItem title="{Name}" number="{Price}" intro="{ProductID}" numberUnit="{CurrencyCode}" />
+                                        </items>
+                                    </List>
+                                </content>
                             </IconTabFilter>
                         </items>
                     </IconTabBar>
