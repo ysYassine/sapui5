@@ -51,11 +51,22 @@
                                     <Button text="{i18n>layoutDraftButton}" icon="sap-icon://save"/>
                                 </Toolbar>
                             </IconTabFilter>
+                            <IconTabSeparator />
                             <IconTabFilter text="{i18n>dataBindingFilter}" key="db" icon="sap-icon://machine">
                                 <content>
                                     <List headerText="{i18n>productListTitle}" items="{/ProductSet}">
                                         <items>
-                                            <ObjectListItem title="{Name}" number="{Price}" intro="{ProductID}" numberUnit="{CurrencyCode}" />
+                                            <ObjectListItem title="{Name}" number="{Price}" intro="{ProductID}" numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}">
+                                                <firstStatus>
+                                                    <ObjectStatus text="{
+                                                    parts: [
+                                                    {path: 'WeightUnit'},
+                                                    {path: 'WeightMeasure'}
+                                                    ],
+                                                    formatter : '.formatter.delivery'
+                                                    }"/>
+                                                </firstStatus>
+                                            </ObjectListItem>
                                         </items>
                                     </List>
                                 </content>
@@ -66,5 +77,4 @@
             </Page>
         </pages>
     </App>
-
 </mvc:View>

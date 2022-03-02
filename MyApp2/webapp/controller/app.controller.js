@@ -1,11 +1,16 @@
 sap.ui.define(
-  ["sap/ui/core/mvc/Controller", "sap/m/MessageToast"],
-  function (Controller, MessageToast) {
+  [
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageToast",
+    "opensap/myapp/model/formatter",
+  ],
+  function (Controller, MessageToast, formatter) {
     "use strict";
     //appname: opensap.myapp
     //name of the folder: controller
     //name of the artifact: APP
     return Controller.extend("opensap.myapp.controller.App", {
+      formatter: formatter,
       onShowHello: function () {
         // read msg from i18n model
         let oBundle = this.getView().getModel("i18n").getResourceBundle();
