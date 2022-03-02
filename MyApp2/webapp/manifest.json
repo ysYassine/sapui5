@@ -53,6 +53,10 @@
       "helloPanel": {
         "type": "sap.ui.model.json.JSONModel",
         "uri": "model/HelloPanel.json"
+      },
+      "address": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Address.json"
       }
     },
     "contentDensities": {
