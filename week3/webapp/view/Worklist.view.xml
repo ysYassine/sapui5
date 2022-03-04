@@ -10,13 +10,16 @@
         </semantic:titleHeading>
 
         <semantic:content>
-            <Table id="table" width="auto" items="{
-                    path: '/SalesOrderSet',
-                    sorter: {
-                        path: 'CustomerName',
-                        descending: false
-                    }
-                }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+            <Table id="table" width="auto" class="sapUiResponsiveMargin" items="{
+            path: '/ProductSet',
+            sorter: {
+            path: 'ProductID',
+            descending: false
+            },
+            parameters: {
+            expand: 'ToSupplier'
+            }
+            }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="false" updateFinished=".onUpdateFinished">
 
                 <headerToolbar>
                     <OverflowToolbar>
@@ -34,6 +37,12 @@
                     <Column id="nameColumn">
                         <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
                     </Column>
+                    <Column id="supplierNameColumn" demandPopin="true" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableSupplierColumnTitle}"/>
+                    </Column>
+                    <Column id="webAddressColumn" demandPopin="false" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableSupplierWebAddressColumnTitle}"/>
+                    </Column>
                     <Column id="unitNumberColumn" hAlign="End">
                         <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
                     </Column>
@@ -42,7 +51,9 @@
                 <items>
                     <ColumnListItem type="Navigation" press=".onPress">
                         <cells>
-                            <ObjectIdentifier title="{ProductID}"/>
+                            <ObjectIdentifier title="{ProductID}" text="{Name}"/>
+                            <Text text="{SupplierName}"/>
+                            <Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank"/>
                             <ObjectNumber number="{
                                     path: 'NetAmount',
                                     formatter: '.formatter.numberUnit'
