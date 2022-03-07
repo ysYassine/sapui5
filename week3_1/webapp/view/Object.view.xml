@@ -9,7 +9,9 @@
     <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" responsive="true">
 
         <semantic:titleHeading>
-            <Title text="{ProductID}" level="H2"/>
+            <Title level="H2">
+                <ObjectIdentifier title="{Name}" titleActive="true" titlePress="onShowDetailPopover"/>
+            </Title>
         </semantic:titleHeading>
 
         <semantic:headerContent>

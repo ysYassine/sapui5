@@ -35,7 +35,18 @@ sap.ui.define(
       /* =========================================================== */
       /* event handlers                                              */
       /* =========================================================== */
-
+      /**
+       * Event handler for press event on object identifier.
+       * opens detail popup from component to show product dimensions.
+       * @public
+       */
+      onShowDetailPopover: function (oEvent) {
+        var oPopover = this._getPopover();
+        var oSource = oEvent.getSource();
+        oPopover.bindElement(oSource.getBindingContext().getPath());
+        // open dialog
+        oPopover.openBy(oEvent.getParameter("domRef"));
+      },
       /**
        * Event handler  for navigating back.
        * It there is a history entry we go one step back in the browser history
@@ -55,6 +66,18 @@ sap.ui.define(
       /* =========================================================== */
       /* internal methods                                            */
       /* =========================================================== */
+      _getPopover: function () {
+        // create dialog lazily
+        if (!this._oPopover) {
+          // create popover via fragment factory
+          this._oPopover = sap.ui.xmlfragment(
+            "week31.view.ResponsivePopover",
+            this
+          );
+          this.getView().addDependent(this._oPopover);
+        }
+        return this._oPopover;
+      },
 
       /**
        * Binds the view to the object path.
