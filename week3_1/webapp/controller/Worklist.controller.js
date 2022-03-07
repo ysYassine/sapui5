@@ -97,6 +97,19 @@ sap.ui.define(
       },
 
       /**
+       * Event handler for press event on object identifier.
+       * opens detail popover to show product dimensions.
+       * @public
+       */
+      onShowDetailPopover: function (oEvent) {
+        var oPopover = this.byId("dimensionsPopover");
+        var oSource = oEvent.getSource();
+        oPopover.bindElement(oSource.getBindingContext().getPath());
+        // open dialog
+        oPopover.openBy(oEvent.getParameter("domRef"));
+      },
+
+      /**
        * Event handler when a table item gets pressed
        * @param {sap.ui.base.Event} oEvent the table selectionChange event
        * @public
