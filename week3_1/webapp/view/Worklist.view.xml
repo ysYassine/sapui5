@@ -1,0 +1,82 @@
+<mvc:View controllerName="week31.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic">
+
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+
+        <semantic:titleHeading>
+            <Title text="{i18n>worklistTitle}" level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:content>
+            <Table id="table" width="auto" items="{
+                    path: '/ProductSet',
+                    sorter: {
+                        path: 'ProductID',
+                        descending: false
+                    },
+                    parameters: {
+                    expand: 'ToSupplier'
+                    }                    
+                }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
+
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+                        <ToolbarSpacer />
+                        <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
+                            <layoutData>
+                                <OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
+                            </layoutData>
+                        </SearchField>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <!-- Name and ID Column -->
+                    <Column id="nameColumn">
+                        <Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+                    </Column>
+                    <!-- Supplier Column -->
+                    <Column id="supplierNameColumn" demandPopin="true" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableSupplierColumnTitle}"/>
+                    </Column>
+                    <!-- Web Adress -->
+                    <Column id="webAddressColumn" demandPopin="false" minScreenWidth="Tablet">
+                        <Text text="{i18n>tableSupplierWebAddressColumnTitle}"/>
+                    </Column>
+                    <!-- Price Column -->
+                    <Column id="unitNumberColumn" hAlign="End">
+                        <Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem type="Navigation" press=".onPress">
+                        <cells>
+                            <!-- Name and ID -->
+                            <ObjectIdentifier title="{ProductID}" text="{Name}"/>
+                            <!-- Supplier -->
+                            <Text text="{SupplierName}"/>
+                            <!-- WebAdress -->
+                            <Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank"/>
+                            <!-- Price -->
+                            <ObjectNumber number="{
+                                    path: 'Price',
+                                    formatter: '.formatter.numberUnit'
+                                }" unit="{CurrencyCode}" />
+
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>
