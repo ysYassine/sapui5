@@ -1,0 +1,37 @@
+<mvc:View controllerName="week4.controller.Object"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" responsive="true">
+
+        <semantic:titleHeading>
+            <Title level="H2">
+                <ObjectIdentifier title="{Name}" titleActive="true" titlePress="onShowDetailPopover"/>
+            </Title>
+        </semantic:titleHeading>
+
+        <semantic:headerContent>
+            <ObjectNumber number="{
+                    path: 'Price',
+                    formatter: '.formatter.numberUnit'
+                }" unit="{CurrencyCode}" />
+        </semantic:headerContent>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+        <semantic:content>
+            <l:VerticalLayout width="100%">
+                <mvc:XMLView viewName="week4.view.ProductDetails"/>
+                <core:Fragment fragmentName="week4.view.SupplierInfo" type="XML"/>
+            </l:VerticalLayout>
+        </semantic:content>
+    </semantic:SemanticPage>
+
+
+</mvc:View>
