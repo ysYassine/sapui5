@@ -1,9 +1,11 @@
-<mvc:View controllerName="week4.controller.ProductDetails"
+<mvc:View controllerName="week4.controller.Object"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:form="sap.ui.layout.form">
+    xmlns:form="sap.ui.layout.form"
+    xmlns:course="week4.control">
     <Panel class="sapUiResponsiveMargin" width="auto" headerText="{i18n>productTitle}" expandable="{device>/system/phone}" expanded="true">
         <content>
+            <course:ProductRate valueSubmit="onRatingChanged"/>
             <form:SimpleForm id="objectForm">
                 <form:content>
                     <Label id="categoryLabel" text="{i18n>productCategoryLabel}"/>

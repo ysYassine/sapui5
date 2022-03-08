@@ -4,8 +4,9 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/routing/History",
     "../model/formatter",
+    "sap/m/MessageToast",
   ],
-  function (BaseController, JSONModel, History, formatter) {
+  function (BaseController, JSONModel, History, formatter, MessageToast) {
     "use strict";
 
     return BaseController.extend("week4.controller.Object", {
@@ -35,6 +36,13 @@ sap.ui.define(
       /* =========================================================== */
       /* event handlers                                              */
       /* =========================================================== */
+      onRatingChanged: function (oEvent) {
+        var iValue = oEvent.getParameter("value"),
+          sMessage = this.getResourceBundle().getText("productRatingSuccess", [
+            iValue,
+          ]);
+        MessageToast.show(sMessage);
+      },
       /**
        * Event handler for press event on object identifier.
        * opens detail popup from component to show product dimensions.
