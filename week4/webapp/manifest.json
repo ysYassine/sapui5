@@ -11,6 +11,7 @@
     "description": "{{appDescription}}",
     "dataSources": {
       "mainService": {
+        "defaultBindingMode": "TwoWay",
         "uri": "/here/goes/your/serviceurl/",
         "type": "OData",
         "settings": {
