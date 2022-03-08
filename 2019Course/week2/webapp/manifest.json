@@ -66,6 +66,10 @@
           "earlyRequests": true,
           "groupId": "$direct"
         }
+      },
+      "movies": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/Movies.json"
       }
     },
     "resources": {
@@ -89,9 +93,7 @@
         {
           "name": "RouteApp",
           "pattern": "RouteApp",
-          "target": [
-            "TargetApp"
-          ]
+          "target": ["TargetApp"]
         }
       ],
       "targets": {

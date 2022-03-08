@@ -2,35 +2,54 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
-    xmlns:f="sap.ui.layout.form">
+    xmlns:f="sap.ui.layout.form"
+    xmlns:unified="sap.ui.unified">
     <Shell id="shell">
         <App id="app">
             <pages>
                 <Page id="page" title="{i18n>title}">
                     <content>
                         <!-- Header Image -->
-                        <Image src="../images/MoviesHeader.png" width="100%" tooltip="Movie illustration" press="sap.m.MessageToast.show('Do you feel like going to the movies?')">
+                        <Image src="../images/MoviesHeader.png" visible="{= !${device>/system/phone} }" width="100%" tooltip="{i18n>imageTooltip}" press="sap.m.MessageToast.show(${i18n>messageToast})">
                         </Image>
-                        <f:SimpleForm id="form" editable="true" layout="ColumnLayout" title="Find Movies" columnsM="2" columnsL="3" columnsXL="3">
+
+                        <!-- Search Form -->
+                        <f:SimpleForm id="form" editable="true" layout="ColumnLayout" title="{i18n>titleForm}" columnsM="2" columnsL="3" columnsXL="3">
                             <f:content>
-                                <Label text="City" labelFor="city"/>
+                                <Label text="{i18n>labelCity}" labelFor="city"/>
 
-                                <SearchField id="city" width="100%" showSearchButton="true" placeholder="Enter City"/>
+                                <SearchField id="city" width="100%" showSearchButton="true" showRefreshButton="true" placeholder="{i18n>cityPlaceholder}" change=".onPress('changing')" liveChange = "true"/>
 
-                                <Label text="Genre" labelFor="genre"/>
+                                <Label text="{i18n>labelGenre}" labelFor="genre"/>
 
                                 <Select id="genre" width="100%">
-                                    <core:ListItem icon="sap-icon://video" key="" text="All"/>
-                                    <core:ListItem icon="sap-icon://physical-activity" key="Action" text="Action"/>
-                                    <core:ListItem icon="sap-icon://electrocardiogram" key="Horror" text="Horror"/>
-                                    <core:ListItem icon="sap-icon://paper-plane" key="ScienceFiction" text="Science Fiction"/>
+                                    <core:ListItem icon="sap-icon://video" key="" text="{i18n>genreAll}"/>
+                                    <core:ListItem icon="sap-icon://physical-activity" key="Action" text="{i18n>genreAction}"/>
+                                    <core:ListItem icon="sap-icon://electrocardiogram" key="Horror" text="{i18n>genreHorror}"/>
+                                    <core:ListItem icon="sap-icon://paper-plane" key="ScienceFiction" text="{i18n>genreScienceFiction}"/>
                                 </Select>
 
                                 <Label />
 
-                                <Button text="Find Movies" class="sapUiSmallMarginTop" type="Emphasized" press=".onPress('for movies!')"/>
+                                <Button text="{i18n>buttonMovieSearch}" class="sapUiSmallMarginTop" type="Emphasized" press=".onPress('for movies!')"/>
+
                             </f:content>
                         </f:SimpleForm>
+
+                        <!-- Calendar -->
+                        <PlanningCalendar id="calendar" startDate="{path: 'movies>/initDate', formatter: '.formatter.formatDate'}" rows="{movies>/movies}" appointmentsVisualization="Filled">
+                            <toolbarContent>
+                                <Title text="{i18n>calendarTitle}" titleStyle="H3"/>
+                            </toolbarContent>
+                            <rows>
+                                <PlanningCalendarRow title="{movies>name}" text="{movies>genre}" appointments="{path: 'movies>appointments', templateShareable: 'true'}">
+                                    <appointments>
+                                        <unified:CalendarAppointment startDate="{path: 'movies>startDate', formatter:'.formatter.formatDate'}" endDate="{path: 'movies>endDate', formatter:'.formatter.formatDate'}" title="{movies>info}" text="{movies>cinemaName}" icon="{movies>icon}" type="{movies>type}">
+                                        </unified:CalendarAppointment>
+                                    </appointments>
+                                </PlanningCalendarRow>
+                            </rows>
+                        </PlanningCalendar>
                     </content>
                 </Page>
             </pages>
